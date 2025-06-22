@@ -175,6 +175,13 @@ def analyze_single_prompt(
     if split_index != -1:
         print(f"Thinking Perplexity: {analysis['thinking_part']['perplexity']:.4f}")
         print(f"Response Perplexity: {analysis['response_part']['perplexity']:.4f}")
+
+    # clear CUDA memory
+    del outputs, all_generated_ids, all_logits, model_inputs
+    if split_index != -1:
+        del thinking_ids, thinking_logits, response_ids, response_logits
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
     return output_path
 
 
