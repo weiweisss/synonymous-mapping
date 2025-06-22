@@ -5,7 +5,7 @@ export HF_ENDPOINT="https://hf-mirror.com"
 export HF_HUB_OFFLINE="1"
 
 # 运行脚本
-python generate.py \
+python -u generate.py \
   --model_name Qwen/Qwen3-4B \
   --decoding_strategy sample \
   --output_dir outputs \

@@ -45,7 +45,7 @@ def get_prompt_list(args):
             max_samples=max_samples,
             question_key=args.question_key
         )
-        print(f"成功加载 {len(prompt_list)} 个prompts from {args.dataset_name} 数据集")
+        print(f"Successfully loads {len(prompt_list)} prompts from {args.dataset_name} datasets")
         return prompt_list
     except Exception as e:
         print(f"加载数据集失败: {e}")
@@ -80,17 +80,13 @@ def main():
         print("No prompts to process. Exiting.")
         return
 
-    print("\n--- Prompts to be processed ---")
-    for i, prompt in enumerate(prompt_list, 1):
-        print(f"  {i}. {prompt[:80]}{'...' if len(prompt) > 80 else ''}")
-
     # 3. --- 准备输出目录 ---
     date_str = datetime.datetime.now().strftime('%Y%m%d')
     safe_model_name = args.model_name.replace('/', '_')
     summary_save_dir = os.path.join(args.output_dir, safe_model_name, args.decoding_strategy, date_str)
     os.makedirs(summary_save_dir, exist_ok=True)
 
-    print(f"\n开始分析，结果将保存到: {summary_save_dir}")
+    print(f"\nStarting generation and analysis. The results will be saved to: {summary_save_dir}")
     result_paths = []
 
     # 4. --- 处理每个prompt ---
